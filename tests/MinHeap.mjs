@@ -1,4 +1,4 @@
-const MinHeap = require('../MinHeap');
+import MinHeap from '../MinHeap.mjs';
 
 let heap = new MinHeap();
 

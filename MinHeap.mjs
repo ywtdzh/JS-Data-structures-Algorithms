@@ -89,4 +89,4 @@ const MinHeap = (function () {
 })();
 
 
-module.exports = MinHeap;
+export default MinHeap;
