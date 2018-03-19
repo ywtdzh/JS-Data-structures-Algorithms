@@ -39,10 +39,7 @@ const MinHeap = (function () {
     }
 
     class MinHeap {
-        constructor(...value) {
-            let values;
-            if (value[0] instanceof Array) values = value[0];
-            else values = value;
+        constructor(...values) {
             properties.set(this, {heap: values});
 
             for (let i = Math.floor((values.length - 2) / 2); i >= 0; i--) {
@@ -50,10 +47,10 @@ const MinHeap = (function () {
             }
         }
 
-        static makeHeap(arrayOfValues) {
+        static makeHeapFromArray(arrayOfValues) {
             if (arrayOfValues instanceof Array)
                 return new MinHeap(...arrayOfValues);
-            return new MinHeap(arrayOfValues);
+            throw new SyntaxError("Invalid Argument: arrayOfValues is not an array");
         }
 
         addElement(e) {

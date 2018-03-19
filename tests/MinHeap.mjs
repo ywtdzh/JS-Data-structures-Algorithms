@@ -22,7 +22,7 @@ for (let i = 0; i < 1000; i++) {
     let num = Math.random() * 1001 - 500;
     data.push(num);
 }
-heap = MinHeap.makeHeap(data);
+heap = MinHeap.makeHeapFromArray(data);
 min = heap.pop();
 for (let i = 0; i < 999; i++) {
     if (heap.peek() >= min) {
