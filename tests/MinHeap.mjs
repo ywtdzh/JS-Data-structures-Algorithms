@@ -1,5 +1,7 @@
 import MinHeap from '../MinHeap.mjs';
 
+const messages = [];
+
 let heap = new MinHeap();
 
 for (let i = 0; i < 1000; i++) {
@@ -12,8 +14,8 @@ for (let i = 0; i < 999; i++) {
         min = heap.pop();
         process.stdout.write('.');
     } else {
-        console.log(heap.stringify());
-        throw(`Test Failed：${heap.peek()} >= ${min} should be false!`);
+        process.stdout.write('E');
+        messages.push(`Test Failed：${heap.peek()} >= ${min} should be false!`);
     }
 }
 
@@ -29,7 +31,7 @@ for (let i = 0; i < 999; i++) {
         min = heap.pop();
         process.stdout.write('.');
     } else {
-        console.log(heap.stringify());
-        throw(`Test Failed：${heap.peek()} >= ${min} should be false!`);
+        process.stdout.write('E');
+        messages.push(`Test Failed：${heap.peek()} >= ${min} should be false!`);
     }
 }
