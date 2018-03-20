@@ -4,15 +4,16 @@ const MinHeap = (function () {
 
     // private methods
     function downAdjust(node) {
-        let heap = properties.get(this).heap;
+        let props = properties.get(this);
+        let heap = props.heap;
         let index = node || 0, temp;
         while (index < heap.length) {
-            if (heap[index * 2 + 1] > heap[index * 2 + 2] && heap[index] > heap[index * 2 + 2]) {
+            if (props.comparator(heap[index * 2 + 1], heap[index * 2 + 2]) > 0 && props.comparator(heap[index], heap[index * 2 + 2]) > 0) {
                 temp = heap[index];
                 heap[index] = heap[index * 2 + 2];
                 heap[index * 2 + 2] = temp;
                 index = index * 2 + 2;
-            } else if (heap[index] > heap[index * 2 + 1]) {
+            } else if (props.comparator(heap[index], heap[index * 2 + 1]) > 0) {
                 temp = heap[index];
                 heap[index] = heap[index * 2 + 1];
                 heap[index * 2 + 1] = temp;
@@ -24,10 +25,11 @@ const MinHeap = (function () {
     }
 
     function upAdjust(node) {
-        let heap = properties.get(this).heap;
+        let props = properties.get(this);
+        let heap = props.heap;
         let index = node || heap.length - 1, temp;
         while (index > 0) {
-            if (heap[index] < heap[Math.floor((index - 1) / 2)]) {
+            if (props.comparator(heap[index], heap[Math.floor((index - 1) / 2)]) < 0) {
                 temp = heap[index];
                 heap[index] = heap[Math.floor((index - 1) / 2)];
                 heap[Math.floor((index - 1) / 2)] = temp;
@@ -40,8 +42,7 @@ const MinHeap = (function () {
 
     class MinHeap {
         constructor(...values) {
-            properties.set(this, {heap: values});
-
+            properties.set(this, {heap: values, comparator: (a, b) => (a > b ? 1 : a < b ? -1 : 0)});
             for (let i = Math.floor((values.length - 2) / 2); i >= 0; i--) {
                 downAdjust.call(this, i);
             }
@@ -51,6 +52,10 @@ const MinHeap = (function () {
             if (arrayOfValues instanceof Array)
                 return new MinHeap(...arrayOfValues);
             throw new SyntaxError("Invalid Argument: arrayOfValues is not an array");
+        }
+
+        setComparator(comparator){
+            properties.get(this).comparator = comparator;
         }
 
         addElement(e) {
