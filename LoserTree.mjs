@@ -41,8 +41,8 @@ const LoserTree = (function () {
             props.comparator = (a, b) => {
                 // null identify the minimum value, while NaN identify the maximum value
                 if (a === b) return 0;
-                else if (a === absoluteLoser || b === absoluteWinner) return -1;
-                else if (b === absoluteLoser || a === absoluteWinner) return 1;
+                else if (a === absoluteLoser || b === absoluteWinner) return 1;
+                else if (b === absoluteLoser || a === absoluteWinner) return -1;
                 else return comparator(a, b);
             };
             leaves.forEach(() => noneLeafNodes.push(absoluteWinner));
@@ -56,9 +56,14 @@ const LoserTree = (function () {
         getWinner() {
             const props = properties.get(this);
             const result = props.nodes[props.nodes[0]];
-            props.nodes[props.nodes[0]] = props.arrays[props.nodes[0]] || absoluteLoser;
+            props.nodes[props.nodes[0]] = props.arrays[props.nodes[0] - Math.floor(props.nodes.length / 2)].shift() || absoluteLoser;
             adjustLeafNode.call(this, props.nodes[0]);
             return result;
+        }
+
+        isEmpty() {
+            const nodes = properties.get(this).nodes;
+            return nodes[nodes[0]] === absoluteLoser;
         }
 
     }

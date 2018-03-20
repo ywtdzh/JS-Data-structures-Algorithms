@@ -11,7 +11,7 @@ data.forEach(array => {
     });
 });
 
-const minLoserTree = new LoserTree(...data);
+const minLoserTree = new LoserTree(data);
 let minValue = minLoserTree.getWinner();
 
 for (let i = 0; i < 1499 - 1; i++) {
@@ -22,21 +22,6 @@ for (let i = 0; i < 1499 - 1; i++) {
     }
     else {
         minValue = newValue;
-        process.stdout.write('.');
-    }
-}
-
-const maxLoserTree = new LoserTree(data, (a, b) => b - a);
-let maxValue = maxLoserTree.getWinner();
-
-for (let i = 0; i < data.length - 1; i++) {
-    let newValue = maxLoserTree.getWinner();
-    if (maxValue < newValue) {
-        messages.push(`Test Failed：${newValue} <= ${maxValue} should be false!`);
-        process.stdout.write('E');
-    }
-    else {
-        maxValue = newValue;
         process.stdout.write('.');
     }
 }
