@@ -1,4 +1,4 @@
-import LoserTree from '../LoserTree.mjs';
+import LoserTree from '../structures/LoserTree.mjs';
 
 const messages = [];
 

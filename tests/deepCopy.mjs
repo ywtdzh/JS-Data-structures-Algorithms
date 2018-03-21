@@ -1,4 +1,4 @@
-import deepCopy from '../deepCopy.mjs';
+import deepCopy from '../utils/deepCopy.mjs';
 import assert from "assert";
 
 const obj1 = {

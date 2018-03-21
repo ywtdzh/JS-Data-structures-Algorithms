@@ -1,4 +1,4 @@
-import MinHeap from '../MinHeap.mjs';
+import MinHeap from '../structures/MinHeap.mjs';
 
 const messages = [];
 

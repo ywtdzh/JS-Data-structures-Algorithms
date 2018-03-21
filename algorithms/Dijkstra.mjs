@@ -1,4 +1,4 @@
-import MinHeap from './MinHeap.mjs';
+import MinHeap from '../structures/MinHeap.mjs';
 
 Array.prototype.getMinNum = function (except) {
     let minIndex = -1, minValue = Infinity, exceptIndex = except || [];

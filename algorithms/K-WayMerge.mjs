@@ -1,4 +1,4 @@
-import LoserTree from './LoserTree.mjs';
+import LoserTree from '../structures/LoserTree.mjs';
 
 function K_way_Merge(k, array, comparator) {
     const arr = [];

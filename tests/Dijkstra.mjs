@@ -1,4 +1,4 @@
-import dijkstra from '../Dijkstra.mjs';
+import dijkstra from '../algorithms/Dijkstra.mjs';
 
 const graph = [
     [0,1,Infinity,2,4,Infinity,Infinity],
