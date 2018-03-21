@@ -1,3 +1,5 @@
+import MinHeap from './MinHeap.mjs';
+
 Array.prototype.getMinNum = function (except) {
     let minIndex = -1, minValue = Infinity, exceptIndex = except || [];
     this.forEach((element, index) => {
@@ -18,13 +20,20 @@ function dijkstra(nodeIndex, graph) {
     graph[nodeIndex].forEach((cost, index) => {
         distance[index] = cost;
     });
+    let distanceReferrer = distance.map((cost, index) => {
+        return {index, cost};
+    });
+    let distanceHeap = new MinHeap(...distanceReferrer);
+    distanceHeap.setComparator((a, b) => (a.cost > b.cost ? 1 : a.cost < b.cost ? -1 : 0));
     while (alreadyServedNodes.length !== graph.length) {
-        const minDistance = distance.getMinNum(alreadyServedNodes);
-        if (minDistance.minValue === Infinity) break;
-        alreadyServedNodes.push(minDistance.minIndex);
-        graph[minDistance.minIndex].forEach((cost, index) => {
-            if (cost + minDistance.minValue < distance[index])
-                distance[index] = cost + minDistance.minValue;
+        const minDistance = distanceHeap.pop();
+        if (minDistance.cost === Infinity) break;
+        alreadyServedNodes.push(minDistance.index);
+        graph[minDistance.index].forEach((cost, index) => {
+            if (cost + minDistance.cost < distance[index]) {
+                distance[index] = cost + minDistance.cost;
+                distanceReferrer[index].cost = distance[index];
+            }
         });
     }
     return distance;
