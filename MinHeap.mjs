@@ -8,12 +8,12 @@ const MinHeap = (function () {
         let heap = props.heap;
         let index = node || 0, temp;
         while (index < heap.length) {
-            if (props.comparator(heap[index * 2 + 1], heap[index * 2 + 2]) > 0 && props.comparator(heap[index], heap[index * 2 + 2]) > 0) {
+            if (heap[index * 2 + 2] !== undefined && props.comparator(heap[index * 2 + 1], heap[index * 2 + 2]) > 0 && props.comparator(heap[index], heap[index * 2 + 2]) > 0) {
                 temp = heap[index];
                 heap[index] = heap[index * 2 + 2];
                 heap[index * 2 + 2] = temp;
                 index = index * 2 + 2;
-            } else if (props.comparator(heap[index], heap[index * 2 + 1]) > 0) {
+            } else if (heap[index * 2 + 1] !== undefined && props.comparator(heap[index], heap[index * 2 + 1]) > 0) {
                 temp = heap[index];
                 heap[index] = heap[index * 2 + 1];
                 heap[index * 2 + 1] = temp;
